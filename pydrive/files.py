@@ -331,7 +331,7 @@ class GoogleDriveFile(ApiAttributeMixin, ApiResource):
     file_id = self.metadata.get('id') or self['id']
     try:
       permission = self.auth.service.permissions().insert(
-        fileId=file_id, body=new_permission).execute(http=self.http)
+        fileId=file_id, body=new_permission, supportAllDrives=True).execute(http=self.http)
     except errors.HttpError as error:
       raise ApiRequestError(error)
     else:
